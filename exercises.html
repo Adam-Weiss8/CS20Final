@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Exercises</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <style>
+      img {
+        border-radius: 20px;
+      }
+      /* #wrapList {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      } */
+      #exerciseList {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .exerciseBox {
+        width: 500px;
+        height: 500px;
+        background-color: burlywood;
+        margin-bottom: 20px;
+        margin-right: 20px;
+        border-radius: 30px;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4);
+      }
+
+      #listInfo {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "2e04ea1608msh0348d71d9daca74p1b4c8ajsn3ae99a91e4eb",
+          "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+        },
+      };
+
+      var exerciseData;
+
+      fetch("https://exercisedb.p.rapidapi.com/exercises", options)
+        .then((response) => response.json())
+        .then((response) => {
+          exerciseData = response;
+
+          //create list info text
+          const listInfo = document.getElementById("listInfo");
+          const range = document.createElement("div");
+          let tempString = "0-9 of " + exerciseData.length;
+          range.textContent = tempString;
+          range.id = "range";
+          listInfo.appendChild(range);
+
+          //create an array of filtered exercises and only show 10 at a time
+          const exerciseView = {
+            divs: [],
+            startIndex: 0,
+            endIndex: 9,
+
+            show: function () {
+              var bigDiv = document.getElementById("exerciseList");
+              bigDiv.innerHTML = "";
+
+              for (i = this.startIndex; i <= this.endIndex; i++) {
+                bigDiv.appendChild(this.divs[i]);
+              }
+            },
+
+            clear: function () {
+              this.divs.length = 0;
+            },
+
+            slideLeft: function () {
+              if (this.startIndex >= 10) {
+                this.startIndex -= 10;
+                this.endIndex = this.startIndex + 9;
+              } else if (this.startIndex == 0 || this.divs.length <= 10) {
+              } else {
+                this.endIndex = this.startIndex;
+                this.startIndex = 0;
+              }
+              document.getElementById("range").textContent =
+                this.startIndex +
+                "-" +
+                this.endIndex +
+                " of " +
+                this.divs.length;
+              this.show();
+
+              // Scroll to the top of the page
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            },
+
+            slideRight: function () {
+              if (this.endIndex <= this.divs.length - 11) {
+                this.endIndex += 10;
+                this.startIndex = this.endIndex - 9;
+              } else if (
+                this.endIndex == this.divs.length - 1 ||
+                this.divs.length <= 10
+              ) {
+              } else {
+                this.startIndex = this.endIndex;
+                this.endIndex = this.divs.length - 1;
+              }
+              document.getElementById("range").textContent =
+                this.startIndex +
+                "-" +
+                this.endIndex +
+                " of " +
+                this.divs.length;
+
+              this.show();
+              // Scroll to the top of the page
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            },
+          };
+
+          //create a filter button
+          const filterButton = document.getElementById("filterButton");
+          const button = document.createElement("button");
+          button.textContent = "Filter";
+          button.onclick = function () {
+            filter(exerciseData, exerciseView);
+          };
+          filterButton.appendChild(button);
+
+          //create list info buttons
+          const leftButton = document.createElement("button");
+          const rightButton = document.createElement("button");
+
+          leftButton.onclick = function () {
+            exerciseView.slideLeft();
+          };
+          leftButton.textContent = "<";
+
+          rightButton.onclick = function () {
+            exerciseView.slideRight();
+          };
+          rightButton.textContent = ">";
+
+          listInfo.appendChild(leftButton);
+          listInfo.appendChild(rightButton);
+
+          //add all exercises to the view and show the first ten
+          for (i = 0; i < exerciseData.length; i++) {
+            exerciseView.divs.push(makeDiv(i, exerciseData));
+          }
+          exerciseView.show();
+
+          //make an exercise div box from an index and the database of exercises
+          function makeDiv(i, exerciseData) {
+            const exerciseDiv = $("<div>");
+            exerciseDiv.attr("id", exerciseData[i].name);
+            exerciseDiv.attr("class", "exerciseBox");
+            exerciseDiv.append("<h2>" + exerciseData[i].name + "</h2>");
+            exerciseDiv.append(
+              "<p>Muscles: " + exerciseData[i].target + "</p>"
+            );
+            exerciseDiv.append(
+              "<p>Equipment: " + exerciseData[i].equipment + "</p>"
+            );
+            exerciseDiv.append(
+              "<img src='" + exerciseData[i].gifUrl + "' width='300px'>"
+            );
+            return exerciseDiv[0];
+          }
+
+          //filter the exercises from the database and add the matches to the exercise view
+          function filter(exerciseData, exerciseView) {
+            exerciseView.clear();
+            document.getElementById("exerciseList").innerHTML = "";
+            var equipment = document.filterExercises.equipmentDropdown.value;
+            var muscle = document.filterExercises.muscleDropdown.value;
+            var matchEquip = equipment == "select one" ? false : true;
+            var matchMuscle = muscle == "select one" ? false : true;
+
+            for (var i = 0; i < exerciseData.length; i++) {
+              var exerciseDiv = document.getElementById(exerciseData[i].name);
+              if (matchEquip && matchMuscle) {
+                if (
+                  equipment == exerciseData[i].equipment &&
+                  muscle == exerciseData[i].target
+                ) {
+                  exerciseView.divs.push(makeDiv(i, exerciseData));
+                  console.log("hit");
+                }
+              } else if (matchEquip && !matchMuscle) {
+                if (equipment == exerciseData[i].equipment) {
+                  exerciseView.divs.push(makeDiv(i, exerciseData));
+                  console.log("hit");
+                }
+              } else if (!matchEquip && matchMuscle) {
+                if (muscle == exerciseData[i].target) {
+                  exerciseView.divs.push(makeDiv(i, exerciseData));
+                  console.log("hit");
+                }
+              } else {
+                exerciseView.divs.push(makeDiv(i, exerciseData));
+              }
+            }
+            exerciseView.startIndex = 0;
+            exerciseView.endIndex =
+              exerciseView.divs.length < 9 ? exerciseView.divs.length : 9;
+            document.getElementById("range").textContent =
+              exerciseView.startIndex +
+              "-" +
+              exerciseView.endIndex +
+              " of " +
+              exerciseView.divs.length;
+            exerciseView.show();
+          }
+        })
+        .catch((err) => console.error(err));
+    </script>
+  </body>
+
+  <h1 id="exerciseHeader">Exercises</h1>
+  <form name="filterExercises">
+    Equipment:
+    <select name="equipmentDropdown">
+      <option value="select one">select one</option>
+      <option value="assisted">assisted</option>
+      <option value="band">band</option>
+      <option value="barbell">barbell</option>
+      <option value="body weight">body weight</option>
+      <option value="bosu ball">bosu ball</option>
+      <option value="cable">cable</option>
+      <option value="dumbbell">dumbbell</option>
+      <option value="elliptical machine">elliptical machine</option>
+      <option value="ez barbell">ez barbell</option>
+      <option value="hammer">hammer</option>
+      <option value="kettlebell">kettlebell</option>
+      <option value="leverage machine">leverage machine</option>
+      <option value="medicine ball">medicine ball</option>
+      <option value="olympic barbell">olympic barbell</option>
+      <option value="resistance band">resistance band</option>
+      <option value="roller">roller</option>
+      <option value="rope">rope</option>
+      <option value="skierg machine">skierg machine</option>
+      <option value="sled machine">sled machine</option>
+      <option value="smith machine">smith machine</option>
+      <option value="stability ball">stability ball</option>
+      <option value="stationary bike">stationary bike</option>
+      <option value="stepmill machine">stepmill machine</option>
+      <option value="tire">tire</option>
+      <option value="trap bar">trap bar</option>
+      <option value="upper body ergometer">upper body ergometer</option>
+      <option value="weighted">weighted</option>
+      <option value="wheel roller">wheel roller</option>
+    </select>
+
+    Muscle Group:
+    <select name="muscleDropdown">
+      <option value="select one">select one</option>
+      <option value="abductors">abductors</option>
+      <option value="abs">abs</option>
+      <option value="adductors">adductors</option>
+      <option value="biceps">biceps</option>
+      <option value="calves">calves</option>
+      <option value="cardiovascular system">cardiovascular system</option>
+      <option value="delts">delts</option>
+      <option value="forearms">forearms</option>
+      <option value="glutes">glutes</option>
+      <option value="hamstrings">hamstrings</option>
+      <option value="lats">lats</option>
+      <option value="levator scapulae">levator scapulae</option>
+      <option value="pectorals">pectorals</option>
+      <option value="quads">quads</option>
+      <option value="serratus anterior">serratus anterior</option>
+      <option value="spine">spine</option>
+      <option value="traps">traps</option>
+      <option value="triceps">triceps</option>
+      <option value="upper back">upper back</option>
+    </select>
+  </form>
+
+  <div id="filterButton"></div>
+  <div id="wrapList">
+    <div id="exerciseList"></div>
+  </div>
+
+  <div id="listInfo"></div>
+</html>
