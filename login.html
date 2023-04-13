@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+    <style>
+        /* Center the form on the page */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        /* Form styles */
+        form {
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label,
+        input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Error message styles */
+        .error {
+            color: #dc3545;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="login-form" onsubmit="return validateForm()" action="home.html" method="post">
+        <h1>Login</h1>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <input type="submit" value="Login">
+        <!-- Error message element -->
+        <p id="error-message" class="error"></p>
+    </form>
+
+    <script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Email validation using a simple regular expression
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailRegex)) {
+                document.getElementById("error-message").innerText = "Please enter a valid email address.";
+                return false;
+            }
+
+            // Password length validation
+            if (password.length < 8) {
+                document.getElementById("error-message").innerText = "Password must be at least 8 characters.";
+                return false;
+            }
+
+            // Form is valid, allow submission
+
+            // Check if the email and password match in the database
+            var user = {
+                email: email,
+                password: password
+            };
+            // Add code here to check if the email and password match in the database
+            // If login is successful, redirect to home.html
+            // Example: window.location.href = "home.html";
+            
+            return true;
+        }
+    </script>
+</body>
+
+</html>
