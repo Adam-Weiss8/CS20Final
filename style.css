@@ -100,92 +100,121 @@
       transform: translate(0, 0);
     }
 
-    footer {
-      background-color: rgb(27, 104, 135);
-      padding: 50px 0;
-      font-family: Arial, sans-serif;
-  }
+footer {
+    background-color: rgb(27, 104, 135);
+    padding: 50px 0;
+    font-family: Arial, sans-serif;
+}
 
-  footer .footer-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
-  }
+footer .footer-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-  footer .footer-col {
-      flex-basis: 50%;
-  }
+footer .footer-col {
+    flex-basis: 50%;
+}
 
-  footer .footer-col h3 {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      color:rgb(255, 254, 254);
-  }
+footer .footer-col h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: rgb(255, 254, 254);
+}
 
-  footer ul {
-      list-style: none;
-      padding-left: 0;
-  }
+footer ul {
+    list-style: none;
+    padding-left: 0;
+}
 
-  footer ul li {
-      margin-bottom: 10px;
-  }
+footer ul li {
+    margin-bottom: 10px;
+}
 
-  footer ul li a {
-      color:rgb(255, 254, 254);
-      text-decoration: none;
-      transition: color 0.2s ease-in-out;
-  }
+footer ul li a {
+    color: rgb(255, 254, 254);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
 
-  footer ul li a:hover {
-      color: #555;
-  }
+footer ul li a:hover {
+    color: #555;
+}
 
-  footer .footer-col-2 {
-      color: rgb(255, 254, 254);
-  }
+footer .footer-col-2 {
+    color: rgb(255, 254, 254);
+}
 
-  footer .footer-col-2 ul {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  }
+footer .footer-col-2 ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-  footer .footer-col-2 li {
-      margin: 0 10px;
-  }
+footer .footer-col-2 ul li a.linkedin {
+    background-image: url('images/linkedin.png');
+    background-color: #555;
+    background-size: cover;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    transition: background-color 0.2s ease-in-out;
+}
 
-  footer .footer-col-2 li a {
-      display: block;
-      width: 30px;
-      height: 30px;
-      background-color: #555;
-      color: #fff;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 30px;
-      transition: background-color 0.2s ease-in-out;
-  }
+footer .footer-col-2 ul li a.facebook {
+    background-image: url('images/facebook.webp');
+    /* background-color: #555; */
+    background-size: cover;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    transition: background-color 0.2s ease-in-out;
+}
 
-  footer .footer-col-2 li a.facebook {
-      background-image: url('facebook-logo.png');
-  }
+footer .footer-col-2 ul li a.instagram {
+    background-image: url('images/instagram.png.webp');
+    /* background-color: #555; */
+    background-size: cover;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    transition: background-color 0.2s ease-in-out;
+}
 
-  footer .footer-col-2 li a.twitter {
-      background-image: url('twitter-logo.png');
-  }
+footer .footer-col-2 ul li a.twitter {
+    background-image: url('images/twitter.webp');
+    /* background-color: #555; */
+    background-size: cover;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    transition: background-color 0.2s ease-in-out;
+}
 
-  footer .footer-col-2 li a.instagram {
-      background-image: url('instagram-logo.png');
-  }
 
-  footer .footer-col-2 li a.linkedin {
-      background-image: url('linkedin-logo.png');
-  }
+footer .footer-col-2 li {
+    margin: 0 10px;
+}
 
-  footer .footer-col-2 li a:hover {
-      background-color: #007bff;
-  }
+footer .footer-col-2 li a:hover {
+    background-color: #007bff;
+}
