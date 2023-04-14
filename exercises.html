@@ -7,7 +7,7 @@
     <title>Exercises</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="" />
+    <link rel="stylesheet" href="style.css" />
     <style>
       img {
         border-radius: 20px;
@@ -28,7 +28,7 @@
       .exerciseBox {
         width: 500px;
         height: 500px;
-        background-color: burlywood;
+        background-color: rgb(27, 104, 135);
         margin-bottom: 20px;
         margin-right: 20px;
         border-radius: 30px;
@@ -38,9 +38,117 @@
       #listInfo {
         text-align: center;
       }
+
+      .exerciseBox {
+        color: white;
+        padding-top: 50px;
+      }
+
+      .exerciseBox hr {
+        margin-bottom: 20px;
+      }
+
+      .exerciseBox h2 {
+        font-size: 24px;
+        font-weight: bold;
+        padding-bottom: 10px;
+      }
+
+      #exerciseHeader {
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Style for the form */
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Style for the dropdowns */
+    select {
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    /* Style for the filter button */
+    #filterButton {
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 20px;
+
+    }
+
+    /* Style for the list wrapper */
+    #wrapList {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    /* Style for the exercise list */
+    #exerciseList {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Style for the list info */
+    #listInfo {
+      text-align: center;
+    }
+
+    #exerciseHeader {
+      padding-top: 20px;
+    }
+
     </style>
   </head>
   <body>
+    <!-- Header -->
+        <nav>
+          <div class="logo">
+            <h2><a href="index.html" style="text-decoration:none; 
+              color:rgb(255, 254, 254); font-size:35px;">
+                GymPal</a></h2>
+          </div>
+        
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about_us.html">About</a></li>
+            <li><a href="exercises.html">Workouts </a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="signup.html">Sign up/Login</a></li>
+          </ul>
+          <div class="menu-bars">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </nav>
+        
+        
+        <script>
+          const menuToggle = document.querySelector(".menu-bars");
+          const nav = document.querySelector("nav ul");
+
+
+          menuToggle.addEventListener("click", () => {
+            nav.classList.toggle("slide");
+          });
+        </script>
+
+
     <script>
       const options = {
         method: "GET",
@@ -175,11 +283,12 @@
             exerciseDiv.attr("id", exerciseData[i].name);
             exerciseDiv.attr("class", "exerciseBox");
             exerciseDiv.append("<h2>" + exerciseData[i].name + "</h2>");
+            exerciseDiv.append("<hr style='border - color: white; '>");
             exerciseDiv.append(
-              "<p>Muscles: " + exerciseData[i].target + "</p>"
+              "<p><strong>Muscles:</strong> " + exerciseData[i].target + "</p>"
             );
             exerciseDiv.append(
-              "<p>Equipment: " + exerciseData[i].equipment + "</p>"
+              "<p><strong>Equipment:</strong> " + exerciseData[i].equipment + "</p>"
             );
             exerciseDiv.append(
               "<img src='" + exerciseData[i].gifUrl + "' width='300px'>"
@@ -241,58 +350,58 @@
     Equipment:
     <select name="equipmentDropdown">
       <option value="select one">select one</option>
-      <option value="assisted">assisted</option>
-      <option value="band">band</option>
-      <option value="barbell">barbell</option>
-      <option value="body weight">body weight</option>
-      <option value="bosu ball">bosu ball</option>
-      <option value="cable">cable</option>
-      <option value="dumbbell">dumbbell</option>
-      <option value="elliptical machine">elliptical machine</option>
-      <option value="ez barbell">ez barbell</option>
-      <option value="hammer">hammer</option>
-      <option value="kettlebell">kettlebell</option>
-      <option value="leverage machine">leverage machine</option>
-      <option value="medicine ball">medicine ball</option>
-      <option value="olympic barbell">olympic barbell</option>
-      <option value="resistance band">resistance band</option>
-      <option value="roller">roller</option>
-      <option value="rope">rope</option>
-      <option value="skierg machine">skierg machine</option>
-      <option value="sled machine">sled machine</option>
-      <option value="smith machine">smith machine</option>
-      <option value="stability ball">stability ball</option>
-      <option value="stationary bike">stationary bike</option>
-      <option value="stepmill machine">stepmill machine</option>
-      <option value="tire">tire</option>
-      <option value="trap bar">trap bar</option>
-      <option value="upper body ergometer">upper body ergometer</option>
-      <option value="weighted">weighted</option>
-      <option value="wheel roller">wheel roller</option>
+      <option value="assisted">Assisted</option>
+      <option value="band">Band</option>
+      <option value="barbell">Barbell</option>
+      <option value="body weight">Body weight</option>
+      <option value="bosu ball">Bosu ball</option>
+      <option value="cable">Cable</option>
+      <option value="dumbbell">Dumbbell</option>
+      <option value="elliptical machine">Elliptical machine</option>
+      <option value="ez barbell">EZ barbell</option>
+      <option value="hammer">Hammer</option>
+      <option value="kettlebell">Kettlebell</option>
+      <option value="leverage machine">Leverage machine</option>
+      <option value="medicine ball">Medicine ball</option>
+      <option value="olympic barbell">Olympic barbell</option>
+      <option value="resistance band">Resistance band</option>
+      <option value="roller">Roller</option>
+      <option value="rope">Rope</option>
+      <option value="skierg machine">Skierg machine</option>
+      <option value="sled machine">Sled machine</option>
+      <option value="smith machine">Smith machine</option>
+      <option value="stability ball">Stability ball</option>
+      <option value="stationary bike">Stationary bike</option>
+      <option value="stepmill machine">Stepmill machine</option>
+      <option value="tire">Tire</option>
+      <option value="trap bar">Trap bar</option>
+      <option value="upper body ergometer">Upper body ergometer</option>
+      <option value="weighted">Weighted</option>
+      <option value="wheel roller">Wheel roller</option>
     </select>
 
     Muscle Group:
     <select name="muscleDropdown">
       <option value="select one">select one</option>
-      <option value="abductors">abductors</option>
-      <option value="abs">abs</option>
-      <option value="adductors">adductors</option>
-      <option value="biceps">biceps</option>
-      <option value="calves">calves</option>
-      <option value="cardiovascular system">cardiovascular system</option>
-      <option value="delts">delts</option>
-      <option value="forearms">forearms</option>
-      <option value="glutes">glutes</option>
-      <option value="hamstrings">hamstrings</option>
-      <option value="lats">lats</option>
-      <option value="levator scapulae">levator scapulae</option>
-      <option value="pectorals">pectorals</option>
-      <option value="quads">quads</option>
-      <option value="serratus anterior">serratus anterior</option>
-      <option value="spine">spine</option>
-      <option value="traps">traps</option>
-      <option value="triceps">triceps</option>
-      <option value="upper back">upper back</option>
+      <option value="abductors">Abductors</option>
+      <option value="abs">Abs</option>
+      <option value="adductors">Adductors</option>
+      <option value="biceps">Biceps</option>
+      <option value="calves">Calves</option>
+      <option value="cardiovascular system">Cardiovascular system</option>
+      <option value="delts">Delts</option>
+      <option value="forearms">Forearms</option>
+      <option value="glutes">Glutes</option>
+      <option value="hamstrings">Hamstrings</option>
+      <option value="lats">Lats</option>
+      <option value="levator scapulae">Levator scapulae</option>
+      <option value="pectorals">Pectorals</option>
+      <option value="quads">Quads</option>
+      <option value="serratus anterior">Serratus anterior</option>
+      <option value="spine">Spine</option>
+      <option value="traps">Traps</option>
+      <option value="triceps">Triceps</option>
+      <option value="upper back">Upper back</option>
     </select>
   </form>
 
@@ -302,4 +411,29 @@
   </div>
 
   <div id="listInfo"></div>
+
+
+  <!-- Footer -->
+      <footer>
+        <div class="footer-wrapper">
+          <div class="footer-col">
+            <h3>GymPal</h3>
+            <ul>
+              <li><a href="about_us.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="exercises.html">Workouts</a></li>
+              <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col-2">
+            <h3>Connect with us</h3>
+            <ul>
+              <li><a href="https://www.facebook.com/" class="facebook"></a></li>
+              <li><a href="https://twitter.com/" class="twitter"></a></li>
+              <li><a href="https://www.instagram.com/?hl=en" class="instagram"></a></li>
+              <li><a href="https://www.linkedin.com/" class="linkedin"></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
 </html>

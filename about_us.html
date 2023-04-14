@@ -114,8 +114,8 @@
             outline: 0;
             display: inline-block;
             padding: 8px;
-            color: black;
-            background-color: blue;
+            color: white;
+            background-color: rgb(27, 104, 135);
             text-align: center;
             cursor: pointer;
             width: 100%;
@@ -127,29 +127,52 @@
 	</style>
 </head>
 <body>
-	<!-- Header -->
-    <body>
-        <nav>
-          <div class="logo">
-          <h2><a href="index.html" style = "text-decoration:none; 
-          color:rgb(255, 254, 254); font-size:35px;">
-          GymPal</a></h2>
+    <nav>
+        <div class="logo">
+            <h2><a href="index.html" style="text-decoration:none; 
+      color:rgb(255, 254, 254); font-size:35px;">
+                    GymPal</a></h2>
         </div>
-    
-    <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Workouts </a></li>
-    <li><a href="#">Contact</a></li>
-    <li><a href="#">Sign up/Login</a></li>
-    </ul>
-    <div class="menu-bars">
-      <input type="checkbox">
-    <span></span>
-    <span></span>
-    <span></span>
-    </div>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about_us.html">About</a></li>
+            <li><a href="exercises.html">Workouts </a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="signup.html">Sign up/Login</a></li>
+        </ul>
+        <div class="menu-bars">
+            <input type="checkbox">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+    <script>
+        const menuToggle = document.querySelector(".menu-bars");
+        const nav = document.querySelector("nav ul");
+
+
+        menuToggle.addEventListener("click", () => {
+            nav.classList.toggle("slide");
+        });
+
+        function sendNickEmail() {
+                window.location.href = "mailto:nicholas.chen632138@tufts.edu?subject=Hello%20&body=How%20are%20you%3F";
+            }
+
+            function sendJakeEmail() {
+                window.location.href = "mailto:jacobfreedman@tufts.edu?subject=Hello%20&body=How%20are%20you%3F";
+            }
+
+            function sendAdamEmail() {
+                window.location.href = "mailto:Adam.Weiss@tufts.edu?subject=Hello%20&body=How%20are%20you%3F";
+            }
+
+            function sendRodrigoEmail() {
+                window.location.href = "mailto:rodrigo.campos@tufts.edu?subject=Hello%20&body=How%20are%20you%3F";
+            }
+    </script>
 
 
     <!-- Insert Logo Here -->
@@ -221,5 +244,28 @@
         </div>
     </div>
     </div>
+
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-col">
+                <h3>GymPal</h3>
+                <ul>
+                    <li><a href="about_us.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="exercises.html">Workouts</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-col-2">
+                <h3>Connect with us</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/" class="facebook"></a></li>
+                    <li><a href="https://twitter.com/" class="twitter"></a></li>
+                    <li><a href="https://www.instagram.com/?hl=en" class="instagram"></a></li>
+                    <li><a href="https://www.linkedin.com/" class="linkedin"></a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
