@@ -1,17 +1,45 @@
+<?php
+$invalid_login = false;
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+	$mysqli = require __DIR__ . "/database.php";
+	
+	$sql = sprintf("SELECT * FROM user
+                    WHERE username = '%s'",
+                   $mysqli->real_escape_string($_POST["username"]));
+	
+	$result = $mysqli->query($sql);
+	$user = $result->fetch_assoc();
+	
+	if ($user) {
+        if (password_verify($_POST["password"], $user["password"])) {
+            session_start();
+            session_regenerate_id();
+            $_SESSION["user_id"] = $user["id"];
+            header("Location: profile.html");
+            exit;
+        }
+    }
+    $invalid_login = true;
+}
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!--Fonts-->
   <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <title>GymPal</title>
+  <title>GymPal - Login</title>
   <style>
     /* Centering the form */
-    .signup-form {
+    .login-form {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -19,14 +47,14 @@
       height: 100vh;
       background-color: #f2f2f2;
     }
-    .signup-form form {
+    .login-form form {
       width: 300px;
       text-align: center;
       background-color: #ffffff;
       padding: 20px;
       border-radius: 10px;
     }
-	.signup-form {
+	.login-form {
 	  display: flex;
       flex-direction: column;
       align-items: center;
@@ -34,11 +62,10 @@
       height: calc(100vh - 200px); /* Subtracting the height of the header */
       background-color: #f2f2f2;
     }
-
-    .signup-form h1 {
+    .login-form h1 {
       font-size: 24px;
     }
-    .signup-form input {
+    .login-form input {
       width: 100%;
       padding: 10px;
       margin-top: 10px;
@@ -46,17 +73,17 @@
       border: none;
       border-bottom: 1px solid #ddd;
     }
-    .signup-form button {
+    .login-form button {
       width: 100%;
       padding: 10px;
-      background-color: #595959; /* Updated button color to match header bar */
+      background-color: #595959;
       color: #fff;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
-    .signup-form button:hover {
-      background-color: #454545; /* Updated hover color */
+    .login-form button:hover {
+      background-color: #454545;
     }
   </style>
 </head>
@@ -70,7 +97,7 @@
       <li><a href="about_us.html">About</a></li>
       <li><a href="exercises.hyml">Workouts </a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Login</a></li>
+      <li><a href="login.php">Login</a></li>
     </ul>
     <div class="menu-bars">
       <input type="checkbox">
@@ -80,63 +107,27 @@
     </div>
   </nav>
   
-  <div class="signup-form">
-    <form id="signupForm" action="signup.php" method="post" id="signup">
-      <h1>Sign Up</h1>
-      <div>
-            <label for="username">Username:</label>
-            <input type="username" id="username" name="username">
-        </div>
-        
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password">
-        </div>	
-		<div>
-            <label for="password_confirmation">Repeat password:</label>
-            <input type="password" id="password_confirmation" name="password_confirmation">
-        </div>
-      <button type="submit">Sign Up</button>
-    </form>
-  </div>
   
-  <script>
-  const signupForm = document.getElementById("signupForm");
-  const usernameInput = document.getElementById("username");
-  const passwordInput = document.getElementById("password");
-  const passwordConfirmationInput = document.getElementById("password_confirmation");
-
-  signupForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const username = usernameInput.value;
-    const password = passwordInput.value;
-    const passwordConfirmation = passwordConfirmationInput.value;
-
-    // Check for non-empty username
-    if (username.trim() === "") {
-      alert("Username cannot be empty");
-      return;
-    }
-
-    // Check for password length
-    if (password.length < 8) {
-      alert("Password must be at least 8 characters long");
-      return;
-    }
-
-    // Check for matching passwords
-    if (password !== passwordConfirmation) {
-      alert("Passwords do not match");
-      return;
-    }
-
-    // Add your sign-up logic here
-    signupForm.submit();
-  });
-</script>
+  <?php if ($invalid_login): ?>
+        <em>Invalid login</em>
+    <?php endif; ?>
   
   
+  <div class="login-form">
+  <form method="post">
+    <h1>Login</h1>
+		<label for="username">Username:</label>
+        <input type="username" name="username" id="username" value="<?= $_POST["username"] ?? "" ?>">
+    
+		<label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    <button type="submit">Login</button>
+    <p>New to GymPal? <a href="signup.html">Signup</a></p>
+  </form>
+</div>
+
+
+
   
   <footer>
         <div class="footer-wrapper">

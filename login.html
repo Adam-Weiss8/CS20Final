@@ -1,3 +1,31 @@
+<?php
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+	$mysqli = require __DIR__ . "/database.php";
+	
+	$sql = sprintf("SELECT * FROM user
+                    WHERE username = '%s'",
+                   $mysqli->real_escape_string($_POST["username"]));
+	
+	$result = $mysqli->query($sql);
+	$user = $result->fetch_assoc();
+	
+	if ($user) {
+        if (password_verify($_POST["password"], $user["password"])) {
+            session_start();
+            session_regenerate_id();
+            $_SESSION["user_id"] = $user["id"];
+            header("Location: profile.html");
+            exit;
+        }
+    }
+    $is_invalid = true;
+}
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +97,7 @@
       <li><a href="about_us.html">About</a></li>
       <li><a href="exercises.hyml">Workouts </a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="signup.html">Sign up/Login</a></li>
+      <li><a href="login.php">Login</a></li>
     </ul>
     <div class="menu-bars">
       <input type="checkbox">
@@ -79,25 +107,23 @@
     </div>
   </nav>
   
-  <div class="login-form">
-    <form id="loginForm">
-      <h1>Login</h1>
-      <input type="text" id="username" placeholder="Username">
-      <input type="password" id="password" placeholder="Password">
-      <button type="submit">Login</button>
-    </form>
-  </div>
   
-  <script>
-    const loginForm = document.getElementById("loginForm");
-    const passwordInput = document.getElementById("password");
+  
+  <div class="login-form">
+  <form method="post">
+    <h1>Login</h1>
+		<label for="username">Username:</label>
+        <input type="username" name="username" id="username">
     
-    loginForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const password = passwordInput.value;
-      // Add your login logic here
-    });
-  </script>
+		<label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    <button type="submit">Login</button>
+    <p>New to GymPal? <a href="signup.html">Signup</a></p>
+  </form>
+</div>
+
+
+
   
   <footer>
         <div class="footer-wrapper">
