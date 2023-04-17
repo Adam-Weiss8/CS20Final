@@ -99,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
     <ul>
       <li><a href="index.html">Home</a></li>
+      <li><a href="profile_page.php">Profile Page</a></li>
       <li><a href="about_us.html">About</a></li>
       <li><a href="exercises.hyml">Workouts </a></li>
       <li><a href="contact.html">Contact</a></li>
