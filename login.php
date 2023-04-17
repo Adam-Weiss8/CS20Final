@@ -1,19 +1,24 @@
 <?php
 $invalid_login = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-	$mysqli = require __DIR__ . "/database.php";
-	
-	$username = $mysqli->real_escape_string($_POST["username"]);
-	$password = $mysqli->real_escape_string($_POST["password"]);
-	
-	$sql = sprintf("SELECT * FROM user
+    $mysqli = require __DIR__ . "/database.php";
+    
+    $username = $mysqli->real_escape_string($_POST["username"]);
+    $password = $mysqli->real_escape_string($_POST["password"]);
+    
+    $sql = sprintf("SELECT * FROM users
                     WHERE username = '%s' AND password = '%s'",
                    $username, $password);
-	
-	$result = $mysqli->query($sql);
-	$user = $result->fetch_assoc();
-	
-	if ($user) {
+    
+    $result = $mysqli->query($sql);
+    if ($result === false) {
+        // Handle MySQL error
+        die("Error executing query: " . $mysqli->error);
+    }
+    
+    $user = $result->fetch_assoc();
+    
+    if ($user) {
         session_start();
         session_regenerate_id();
         $_SESSION["user_id"] = $user["id"];
@@ -21,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     } else {
         $invalid_login = true;
+		echo "<script>alert('Invalid username or password');</script>";
     }
 }
 ?>
