@@ -3,29 +3,28 @@ $invalid_login = false;
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 	$mysqli = require __DIR__ . "/database.php";
 	
+	$username = $mysqli->real_escape_string($_POST["username"]);
+	$password = $mysqli->real_escape_string($_POST["password"]);
+	
 	$sql = sprintf("SELECT * FROM user
-                    WHERE username = '%s'",
-                   $mysqli->real_escape_string($_POST["username"]));
+                    WHERE username = '%s' AND password = '%s'",
+                   $username, $password);
 	
 	$result = $mysqli->query($sql);
 	$user = $result->fetch_assoc();
 	
 	if ($user) {
-        if (password_verify($_POST["password"], $user["password"])) {
-            session_start();
-            session_regenerate_id();
-            $_SESSION["user_id"] = $user["id"];
-            header("Location: profile.html");
-            exit;
-        }
+        session_start();
+        session_regenerate_id();
+        $_SESSION["user_id"] = $user["id"];
+        header("Location: profile.html");
+        exit;
+    } else {
+        $invalid_login = true;
     }
-    $invalid_login = true;
 }
-
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
