@@ -60,6 +60,19 @@
             text-align: center;
         }
 
+        #formdata label,
+        #formdata input {
+            /* display: block; */
+            margin-bottom: 15px; /* Add desired amount of whitespace here */
+        }
+
+        hr {
+            border: none; /* Remove default border */
+            height: 4px; /* Set height of the line */
+            background-color: #000; /* Set background color of the line */
+            margin-top: 20px; /* Add margin at the top of the line */
+            margin-bottom: 20px; /* Add margin at the bottom of the line */
+        }
     </style>
 </head>
 <body>
@@ -87,6 +100,17 @@
     </nav>
     <br>
     <h1>Workout Planner</h1>
+
+    <div class="metadata" style="text-align: center;">
+        <form id="formdata" style="width: 30%; margin: 0 auto;">
+            <label for="workoutName">Workout Name:</label>
+            <input type="text" style="width: 100%;">
+            <label for="date">Workout date:</label>
+            <input type="date" id="start">
+        </form>
+    </div>
+
+    <hr>
 
     <div class="container">
         <div class="workoutLogger">
