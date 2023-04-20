@@ -1,37 +1,7 @@
 <?php
-$invalid_login = false;
-// if ($_SERVER["REQUEST_METHOD"] === "POST") {
-//     $mysqli = require __DIR__ . "/database.php";
-    
-//     $username = $mysqli->real_escape_string($_POST["username"]);
-//     $password = $mysqli->real_escape_string($_POST["password"]);
-    
-//     $sql = sprintf("SELECT * FROM users
-//                     WHERE username = '%s' AND password = '%s'",
-//                    $username, $password);
-    
-//     $result = $mysqli->query($sql);
-//     if ($result === false) {
-//         // Handle MySQL error
-//         die("Error executing query: " . $mysqli->error);
-//     }
-    
-//     $user = $result->fetch_assoc();
-    
-//     if ($user) {
-//         session_start();
-//         session_regenerate_id();
-//         $_SESSION["user_id"] = $user["id"];
-//         header("Location: profile.html");
-//         exit;
-//     } else {
-//         $invalid_login = true;
-// 		echo "<script>alert('Invalid username or password');</script>";
-//     }
-// }
-session_start();
-if(isset($_SESSION['user_id'])) {
-	echo "Your session is running " . $_SESSION['user_id'];
+	session_start();
+	if (!isset($_SESSION['user_id'])) {
+		header("Location: login.php");
   }
 ?>
 
@@ -210,6 +180,34 @@ if(isset($_SESSION['user_id'])) {
 		}
 	</style>
 </head>
+<?php
+	$mysqli = require __DIR__ . "/database.php";
+	$id = $_SESSION["user_id"];
+	$sql = "SELECT type, date, workoutID FROM Workouts WHERE userID = '$id'";
+	$result = $mysqli->query($sql);
+
+	if ($result->num_rows > 0) {
+
+		// Each row is a Workout Card
+		while($row = $result->fetch_assoc()) {
+			$workoutID = $row["workoutID"];
+			$sql2 = "SELECT exerciseName, reps, sets, weight FROM exercises WHERE workoutID = '$workoutID'";
+			$res2 = $mysqli->query($sql);
+
+			echo "date: " . $row["date"]. " - type: " . $row["type"]. " " . $row["workoutID"]. "<br>";
+			// Each inner row is an exercise
+			while ($innerRow = $res2->fetch_assoc()) {
+				$sets = $innerRow["sets"];
+				$reps = $innerRow["reps"];
+				$weight = $innerRow["weight"];
+				echo "exerciseName: " . $innerRow["exerciseName"] . "reps, sets, and weight: " . $sets . " ";
+				echo $reps . " " . $weight;
+			}
+
+		}
+	  }
+
+?>
 
 <body>
 	<div class="container">
