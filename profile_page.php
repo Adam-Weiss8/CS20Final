@@ -180,8 +180,40 @@
 		}
 	</style>
 </head>
+
+<body>
+	<div class="container">
+		<img class="profile-picture" src="https://via.placeholder.com/200x200" alt="Profile Picture">
+		<div class="profile-info">
+		<?php
+			$mysqli = require __DIR__ . "/database.php";
+			$user = $_SESSION["user_id"];
+			$query = "SELECT * FROM users WHERE userID = '$user'";
+			$res = $mysqli->query($query);
+			$row = $res->fetch_assoc();
+			$join = substr($row['joinDate'], 0, 10);
+			echo '<div class="profile-name">' . $row['FirstName'] . ' ' . $row['LastName'] . '</div>';
+			echo '<div class="member-since"> Member since '. $join . '</div>';
+		?>
+
+		</div>
+		
+	</div>
+
+	<div class="profile-container">
+		<div class="profile-stats">
+		<?php 
+		echo '<div class="workouts-completed"><strong>Workouts completed: </strong>' . $row['workoutsCompleted'] . '</div>';
+		echo '<div class="weight"><strong>Weight: </strong>' . $row['weight'] . '</div>';
+		echo '<div class="height"><strong>Height: </strong>' . $row['height'] . '</div>';
+		echo '<div class="age"><strong>Age: </strong>' . $row['age'] . '</div>';
+		?>
+		</div>
+	</div>
+	<div class="workouts-container">
+		<h1> Workouts </h1>
 <?php
-	$mysqli = require __DIR__ . "/database.php";
+	
 	$id = $_SESSION["user_id"];
 	$sql = "SELECT type, date, workoutID FROM Workouts WHERE userID = '$id'";
 	$result = $mysqli->query($sql);
@@ -190,47 +222,44 @@
 
 		// Each row is a Workout Card
 		while($row = $result->fetch_assoc()) {
+			$type = $row["type"];
+			$date = $row["date"];
+
+			/* echoing the workout type and date */
+			echo '<div class = "workout-card">';
+
+			/* Echoing the type as the H2 header */
+			echo '<h2>' . $type . '</h2>';
+			echo '<p><strong>Date: </strong>' . $date . '</p>';
+			echo '<p><strong>Exercise: </strong> ';
+			echo '<div class ="workout-dropdown">';
+			echo '<span>' .$type .'</span>';
 			$workoutID = $row["workoutID"];
 			$sql2 = "SELECT exerciseName, reps, sets, weight FROM exercises WHERE workoutID = '$workoutID'";
-			$res2 = $mysqli->query($sql);
+			$res2 = $mysqli->query($sql2);
 
-			echo "date: " . $row["date"]. " - type: " . $row["type"]. " " . $row["workoutID"]. "<br>";
-			// Each inner row is an exercise
+			/* Each inner row is an exercise in the workout-dropdown class */
+			echo '<div class="workout-dropdown-content">';
+
 			while ($innerRow = $res2->fetch_assoc()) {
+				echo '<script> console.log("lolol") </script>';
 				$sets = $innerRow["sets"];
 				$reps = $innerRow["reps"];
 				$weight = $innerRow["weight"];
-				echo "exerciseName: " . $innerRow["exerciseName"] . "reps, sets, and weight: " . $sets . " ";
-				echo $reps . " " . $weight;
+				$name = $innerRow["exerciseName"];
+				echo '<a href="#">' . $name . ' ' . $sets . 'x' . $reps . ' @ ' . $weight . 'lbs</a>';
 			}
-
+			
+			/* Close the workout dropdown div and workout*/
+			echo '</div>';
+			echo '</div>';
+			echo '</p>';
+			echo '</div>';
 		}
 	  }
-
 ?>
-
-<body>
-	<div class="container">
-		<img class="profile-picture" src="https://via.placeholder.com/200x200" alt="Profile Picture">
-		<div class="profile-info">
-			<div class="profile-name">John Doe</div>
-			<div class="member-since">Member since January 2022</div>
-		</div>
-		
-	</div>
-
-	<div class="profile-container">
-		<div class="profile-stats">
-			<div class="workouts-completed"><strong>Workouts completed:</strong> 25</div>
-			<div class="weight"><strong>Weight:</strong> 185</div>
-			<div class="height"><strong>Height:</strong> 6'0</div>
-			<div class="age"><strong>Age:</strong> 23</div>
-		</div>
-	</div>
-
-	<div class="workouts-container">
-		<h1> Workouts </h1>
-		<div class="workout-card">
+</div>
+		<!-- <div class="workout-card">
 			<h2>Cardio</h2>
 			<p><strong>Date: </strong> April 1, 2023</p>
 			<p><strong>Exercise: </strong> 
@@ -288,6 +317,6 @@
 			<p><strong>Sets: </strong> 3</p>
 			<p><strong>Reps: </strong> 10</p>
 		</div>
-	</div>
+	</div> -->
 </body>
 </html>
