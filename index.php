@@ -23,9 +23,16 @@
 <ul>
 <li><a href="index.html">Home</a></li>
 <li><a href="about_us.html">About</a></li>
-<li><a href="#">Workouts </a></li>
-<li><a href="#">Contact</a></li>
-<li><a href="login.php">Sign up/Login</a></li>
+<li><a href="workout.html">Workouts </a></li>
+<li><a href="contact.html">Contact</a></li>
+<!-- Change the nav bar depending on whether the user is signed in or not -->
+  <?php
+  if ($_SESSION['user_id']) {
+    echo '<li><a href="profile_page.php">Profile Page</a></li>';
+  } else {
+    echo '<li><a href="signup.html">Sign up/Login</a></li>';
+  }
+?>
 </ul>
 <div class="menu-bars">
   <input type="checkbox">
