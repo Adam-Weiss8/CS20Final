@@ -43,6 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <link rel="stylesheet" href="style.css" />
   <title>GymPal - Login</title>
   <style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+  }
     /* Centering the form */
     .login-form {
       display: flex;
@@ -107,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <li><a href="exercises.html">Workouts </a></li>
       <li><a href="workout.html">Create</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="signup.html">Sign up/Login</a></li>
+      <li><a href="login.php">Login</a></li>
     </ul>
     <div class="menu-bars">
       <input type="checkbox">
