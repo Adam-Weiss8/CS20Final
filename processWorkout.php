@@ -29,10 +29,14 @@ $WorkoutID = $row[0];
 
 //add all exercises to the exercise table
 for ($i = 0; $i < $numExercises; $i++) {
-        $exerciseNum = $_POST["exerciseName"][$i];
-        $sets = $_POST["sets"][$i];
-        $reps = $_POST["reps"][$i];
-        $weight = $_POST["weight"][$i];
+        $exerciseNum = strval($_POST["exerciseName" . $i]);
+        $sets = intval($_POST["sets" . $i]);
+        $reps = intval($_POST["reps" . $i]);
+        $weight = strval($_POST["weight" . $i]);
+
+         echo "<script>console.log('$exerciseNum');</script>";
+
+        //echo "<script>console.log(". $exerciseNum .  $sets . $reps . $weight . ") </script>"
 
 
         //add data to the database
