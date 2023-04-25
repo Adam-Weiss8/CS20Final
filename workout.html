@@ -83,11 +83,20 @@
   <body>
     <nav>
       <div class="logo">
-        <h2><a href="index.html" style="text-decoration:none; 
-          color:rgb(255, 254, 254); font-size:35px;">
-            GymPal</a></h2>
+        <h2>
+          <a
+            href="index.html"
+            style="
+              text-decoration: none;
+              color: rgb(255, 254, 254);
+              font-size: 35px;
+            "
+          >
+            GymPal</a
+          >
+        </h2>
       </div>
-    
+
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="about_us.html">About</a></li>
@@ -98,7 +107,7 @@
         <li><a href="signup.html">Sign up/Login</a></li>
       </ul>
       <div class="menu-bars">
-        <input type="checkbox">
+        <input type="checkbox" />
         <span></span>
         <span></span>
         <span></span>
@@ -222,8 +231,8 @@
       });
     </script>
 
-    <div style="text-align: center; padding-bottom: 15px;">
-        <button onclick="submitWorkout()">Submit Workout</button>
+    <div style="text-align: center; padding-bottom: 15px">
+      <button onclick="submitWorkout()">Submit Workout</button>
     </div>
 
     <script>
@@ -275,25 +284,25 @@
         for (let i = 0; i < numExercises; i++) {
           const nameInput = document.createElement("input");
           nameInput.type = "hidden";
-          nameInput.name = "exerciseName" + i;
+          nameInput.name = "exerciseName";
           nameInput.value = names[i].value;
           finalForm.appendChild(nameInput);
 
           const setsInput = document.createElement("input");
           setsInput.type = "hidden";
-          setsInput.name = "sets" + i;
+          setsInput.name = "sets";
           setsInput.value = sets[i].value;
           finalForm.appendChild(setsInput);
 
           const repsInput = document.createElement("input");
           repsInput.type = "hidden";
-          repsInput.name = "reps" + i;
+          repsInput.name = "reps";
           repsInput.value = reps[i].value;
           finalForm.appendChild(repsInput);
 
           const weightInput = document.createElement("input");
           weightInput.type = "hidden";
-          weightInput.name = "weight" + i;
+          weightInput.name = "weight";
           weightInput.value = weight[i].value;
           finalForm.appendChild(weightInput);
         }
