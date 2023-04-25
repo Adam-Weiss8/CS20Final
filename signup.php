@@ -10,16 +10,6 @@
   <link rel="stylesheet" href="style.css" />
   <title>GymPal</title>
   <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Rubik', sans-serif;
-  }
-	.nav {
-        height: 60px;
-        background-color: #ccc;
-        padding-bottom: 10px;
-      }
     /* Centering the form */
     .signup-form {
       display: flex;
@@ -45,7 +35,7 @@
     }
 
     .signup-form h1 {
-      font-size: 20px;
+      font-size: 24px;
     }
     .signup-form input {
       width: 100%;
@@ -67,31 +57,19 @@
     .signup-form button:hover {
       background-color: #454545; /* Updated hover color */
     }
-	
   </style>
 </head>
 <body>
   <nav>
     <div class="logo">
-      <h2><a href="index.php" style="text-decoration:none; 
-        color:rgb(255, 254, 254); font-size:35px;">
-          GymPal</a></h2>
+      <h2><a href="index.html" style="text-decoration:none; color:rgb(255, 254, 254); font-size:35px;">GymPal</a></h2>
     </div>
-  
     <ul>
-      <li><a href="index.php">Home</a></li>
-      <li><a href="about_us.php">About</a></li>
-      <li><a href="exercises.php">Workouts </a></li>
-      <li><a href="workout.php">Create</a></li>
-      <li><a href="contact.php">Contact</a></li>
-      <?php
-        session_start();
-        if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-            echo '<li><a href="profile_page.php">Profile</a></li>';
-        } else {
-            echo '<li><a href="login.php">Login</a></li>';
-        }
-      ?>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about_us.html">About</a></li>
+      <li><a href="exercises.hyml">Workouts </a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="login.php">Login</a></li>
     </ul>
     <div class="menu-bars">
       <input type="checkbox">
@@ -102,100 +80,106 @@
   </nav>
   
   <div class="signup-form">
-  <form id="signupForm" action="signupForm.php" method="post" id="signup">
-    <h1>Subscribe: $9.99/month</h1>
-    <div>
-      <label for="username">Username:</label>
-      <input type="username" id="username" name="username" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" required>
-    </div>
-    <div>
-      <label for="password_confirmation">Repeat password:</label>
-      <input type="password" id="password_confirmation" name="password_confirmation" required>
-    </div>
-	 <div>
+    <form id="signupForm" action="signupForm.php" method="post" id="signup">
+      <h1>Subscribe: $9.99/month</h1>
+      <div>
+            <label for="username">Username:</label>
+            <input type="username" id="username" name="username">
+        </div>
+        
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+        </div>	
+		<div>
+            <label for="password_confirmation">Repeat password:</label>
+            <input type="password" id="password_confirmation" name="password_confirmation">
+        </div>
+		<div>
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <input type="email" id="email" name="email">
     </div>
     <div>
-      <label for="credit_card">Credit Card Number:</label>
-      <input type="text" id="credit_card" name="credit_card" pattern="[0-9]{16}" required>
+      <label for="card-num">Credit Card Number:</label>
+      <input type="text" id="card-num" name="card-num">
     </div>
     <div>
-      <label for="expiration-date">Expiration Date:</label>
-      <input type="month" id="expiration-date" name="expiration-date" required>
+      <label for="card-security-code">Security Code:</label>
+      <input type="text" id="card-security-code" name="card-security-code">
     </div>
-	<div>
-      <label for="security-code">Security Code:</label>
-      <input type="text" id="security-code" name="security-code" pattern="[0-9]{3}" required>
+    <div>
+      <label for="card-expiration">Expiration Date (XX/XX):</label>
+      <input type="text" id="card-expiration" name="card-expiration">
     </div>
-    <button type="submit">Sign Up</button>
-  </form>
-</div>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+  
+  <script>
+  const signupForm = document.getElementById("signupForm");
+  const usernameInput = document.getElementById("username");
+  const passwordInput = document.getElementById("password");
+  const emailInput = document.getElementById("email");
+  const passwordConfirmationInput = document.getElementById("password_confirmation");
+  const cardNumInput = document.getElementById("card-num");
+  const cardSecurityCodeInput = document.getElementById("card-security-code");
+  const cardExpirationInput = document.getElementById("card-expiration");
 
-<script>
-const signupForm = document.getElementById("signupForm");
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
-const passwordConfirmationInput = document.getElementById("password_confirmation");
-const creditCardInput = document.getElementById("credit_card");
-const securityCodeInput = document.getElementById("security_code");
-const expirationDateInput = document.getElementById("expiration_date");
+  signupForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-signupForm.addEventListener("submit", (event) => {
-  event.preventDefault();
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+    const passwordConfirmation = passwordConfirmationInput.value;
+	const email = emailInput.value;
+    const cardNum = cardNumInput.value;
+    const cardSecurityCode = cardSecurityCodeInput.value;
+    const cardExpiration = cardExpirationInput.value;
 
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-  const passwordConfirmation = passwordConfirmationInput.value;
-  const creditCardNumber = creditCardInput.value;
-  const securityCode = securityCodeInput.value;
-  const expirationDate = expirationDateInput.value;
+    // Check for non-empty username
+    if (username.trim() === "") {
+      alert("Username cannot be empty");
+      return;
+    }
 
-  // Check for non-empty username
-  if (username.trim() === "") {
-    alert("Username cannot be empty");
-    return;
-  }
+    // Check for password length
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long");
+      return;
+    }
 
-  // Check for password length
-  if (password.length < 8) {
-    alert("Password must be at least 8 characters long");
-    return;
-  }
-
-  // Check for matching passwords
-  if (password !== passwordConfirmation) {
-    alert("Passwords do not match");
+    // Check for valid email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.match(emailRegex)) {
+    alert("Invalid email address");
     return;
   }
 
   // Check for valid credit card number
-  if (!creditCardNumber.match(/^\d{16}$/)) {
-    alert("Invalid credit card number");
+  const cardNumRegex = /^\d{16}$/;
+  if (!cardNum.match(cardNumRegex)) {
+    alert("Credit card number must be 16 digits");
     return;
   }
 
-  // Check for valid security code
-  if (!securityCode.match(/^\d{3}$/)) {
-    alert("Invalid security code");
-    return;
-  }
-
-  // Check for valid expiration date
-  if (!expirationDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
-    alert("Invalid expiration date");
-    return;
-  }
-
-  // Add your sign-up logic here
-  signupForm.submit();
-});
+    // Check for valid credit card security code
+    const cardSecurityCodeRegex = /^\d{3}$/;
+    if (!cardSecurityCode.match(cardSecurityCodeRegex)) {
+      alert("Credit card security code must be 3 digits");
+      return;
+    }
+	
+	// Check for valid credit card expiration date
+    const cardExpirationRegex = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
+    if (!cardExpiration.match(cardExpirationRegex)) {
+      alert("Invalid credit card expiration date");
+      return;
+    }
+	
+	
+    signupForm.submit();
+  });
 </script>
-
   
   
   
@@ -204,9 +188,9 @@ signupForm.addEventListener("submit", (event) => {
           <div class="footer-col">
             <h3>GymPal</h3>
             <ul>
-              <li><a href="about_us.php">About</a></li>
-              <li><a href="contact.php">Contact</a></li>
-              <li><a href="exercises.php">Workouts</a></li>
+              <li><a href="about_us.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li><a href="exercises.html">Workouts</a></li>
               <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Blog</a></li>
             </ul>
           </div>
