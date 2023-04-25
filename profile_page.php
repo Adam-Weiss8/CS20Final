@@ -206,13 +206,13 @@
 
 	<!-- Change the nav bar depending on whether the user is signed in or not -->
 	<?php
-		if ($_SESSION['user_id']) {
-			echo '<li><a href="profile_page.php">Profile Page</a></li>';
-		} else {
-			echo '<li><a href="signup.php">Sign up/Login</a></li>';
-		}
-		
-	?>
+        session_start();
+        if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+            echo '<li><a href="profile_page.php">Profile</a></li>';
+        } else {
+            echo '<li><a href="login.php">Login</a></li>';
+        }
+      ?>
 	</ul>
 	<div class="menu-bars">
 	<input type="checkbox">

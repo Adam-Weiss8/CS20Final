@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 		<label for="password">Password:</label>
         <input type="password" name="password" id="password">
     <button type="submit">Login</button>
-    <p>New to GymPal? <a href="signup.html">Signup</a></p>
+    <p>New to GymPal? <a href="signup.php">Signup</a></p>
   </form>
 </div>
 
