@@ -30,16 +30,16 @@ $WorkoutID = $row[0];
 //add all exercises to the exercise table
 for ($i = 0; $i < $numExercises; $i++) {
         //prep post strings
-        $exerciseNumString = "exerciseName" . $i;
-        $setsString = "sets" . $i;
-        $repsString = "reps" . $i;
-        $weightString = "weight" . $i;
+        $exerciseNumString = "exerciseName";
+        $setsString = "sets";
+        $repsString = "reps";
+        $weightString = "weight";
 
         //get form data
-        $exerciseNum = $_POST[$exerciseNumString];
-        $sets = $_POST[$setsString];
-        $reps = $_POST[$repsString];
-        $weight = $_POST[$weightString];
+        $exerciseNum = $_POST[$exerciseNumString][$i];
+        $sets = $_POST[$setsString][$i];
+        $reps = $_POST[$repsString][$i];
+        $weight = $_POST[$weightString][$i];
 
         //add data to the database
         $sql = "INSERT INTO exercises (exerciseName, workoutID, reps, sets, weight) VALUES ('$exerciseNum', '$WorkoutID', '$sets', '$reps', '$weight')";
