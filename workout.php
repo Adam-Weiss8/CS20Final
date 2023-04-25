@@ -1,12 +1,20 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
   <head>
     <title>Workout Planner</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Mukta&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
-      rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mukta&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       body {
@@ -85,7 +93,7 @@
       <div class="logo">
         <h2>
           <a
-            href="index.html"
+            href="index.php"
             style="
               text-decoration: none;
               color: rgb(255, 254, 254);
@@ -104,11 +112,16 @@
         <li><a href="workout.php">Create</a></li>
         <li><a href="contact.php">Contact</a></li>
         <?php
-        session_start();
-        if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+        if (isset($_SESSION["user_id"])) {
             echo '<li><a href="profile_page.php">Profile</a></li>';
+            echo '<script>console.log("USER ID")</script>';
+            echo '<script>console.log('.$_SESSION["user_id"] . ')</script>';
         } else {
             echo '<li><a href="login.php">Login</a></li>';
+        }
+
+        if ($_SESSION["user_id"] == 0) {
+          header("Location: login.php");
         }
       ?>
       </ul>
@@ -125,6 +138,7 @@
     <div class="metadata" style="text-align: center">
       <form
         name="formdata"
+        id="formdata"
         style="width: 30%; margin: 0 auto"
         method="post"
         action="processWorkout.php"
@@ -163,6 +177,7 @@
     <div id="workoutList"></div>
 
     <script>
+      var count = 0;
       let exerciseItem; // Declare exerciseItem outside of the event listener function
       document
         .getElementById("workoutForm")
@@ -187,6 +202,7 @@
 
           // Add exercise to the workout list
           const workoutList = document.getElementById("workoutList");
+          const form = document.getElementById("formdata");
           exerciseItem = document.createElement("div");
           exerciseItem.innerHTML = `
                 <h3 class='exerciseName'>${exercise.exerciseName}</h3>
@@ -197,6 +213,33 @@
                 <button class="editBtn">Edit</button>
             `;
           workoutList.appendChild(exerciseItem);
+          // console.log("added text");
+
+          nameInput = document.createElement("input");
+          nameInput.type = "hidden";
+          nameInput.name = "exerciseName" + count;
+          nameInput.value = exercise.exerciseName;
+          form.appendChild(nameInput);
+
+          setsInput = document.createElement("input");
+          setsInput.type = "hidden";
+          setsInput.name = "sets" + count;
+          setsInput.value = exercise.sets;
+          form.appendChild(setsInput);
+
+          repsInput = document.createElement("input");
+          repsInput.type = "hidden";
+          repsInput.name = "reps" + count;
+          repsInput.value = exercise.reps;
+          form.appendChild(repsInput);
+
+          weightInput = document.createElement("input");
+          weightInput.type = "hidden";
+          weightInput.name = "weight" + count;
+          weightInput.value = exercise.weight;
+          form.appendChild(weightInput);
+
+          // console.log("added to form");
 
           // Reset form inputs
           document.getElementById("exerciseName").value = "";
@@ -204,6 +247,8 @@
           document.getElementById("reps").value = "";
           document.getElementById("weight").value = "";
           document.getElementById("notes").value = "";
+          // console.log("cleared form");
+          count++;
         });
 
       // Add event listener to "Edit" button
@@ -286,58 +331,58 @@
         numExercisesInput.value = numExercises;
         finalForm.appendChild(numExercisesInput);
 
-        //loop and add hidden fields
-        for (let i = 0; i < numExercises; i++) {
-          const nameInput = document.createElement("input");
-          nameInput.type = "hidden";
-          nameInput.name = "exerciseName";
-          nameInput.value = names[i].value;
-          finalForm.appendChild(nameInput);
-
-          const setsInput = document.createElement("input");
-          setsInput.type = "hidden";
-          setsInput.name = "sets";
-          setsInput.value = sets[i].value;
-          finalForm.appendChild(setsInput);
-
-          const repsInput = document.createElement("input");
-          repsInput.type = "hidden";
-          repsInput.name = "reps";
-          repsInput.value = reps[i].value;
-          finalForm.appendChild(repsInput);
-
-          const weightInput = document.createElement("input");
-          weightInput.type = "hidden";
-          weightInput.name = "weight";
-          weightInput.value = weight[i].value;
-          finalForm.appendChild(weightInput);
-        }
         finalForm.submit();
       }
     </script>
 
-        <footer>
-          <div class="footer-wrapper">
-            <div class="footer-col">
-              <h3>GymPal</h3>
-              <ul>
-                <li><a href="about_us.php">About</a></li>
-                <li><a href="contact.php">Contact</a></li>
-                <li><a href="exercises.php">Workouts</a></li>
-                <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Blog</a></li>
-              </ul>
-            </div>
-            <div class="footer-col-2">
-              <h3>Connect with us</h3>
-              <ul>
-                <li><a href="https://www.facebook.com/" class="facebook" target="_blank"></a></li>
-                <li><a href="https://twitter.com/" class="twitter" target="_blank"></a></li>
-                <li><a href="https://www.instagram.com/?hl=en" class="instagram" target="_blank"></a></li>
-                <li><a href="https://www.linkedin.com/" class="linkedin" target="_blank"></a></li>
-              </ul>
-            </div>
-          </div>
-        </footer>
+    <footer>
+      <div class="footer-wrapper">
+        <div class="footer-col">
+          <h3>GymPal</h3>
+          <ul>
+            <li><a href="about_us.php">About</a></li>
+            <li><a href="contact.php">Contact</a></li>
+            <li><a href="exercises.php">Workouts</a></li>
+            <li>
+              <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Blog</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-col-2">
+          <h3>Connect with us</h3>
+          <ul>
+            <li>
+              <a
+                href="https://www.facebook.com/"
+                class="facebook"
+                target="_blank"
+              ></a>
+            </li>
+            <li>
+              <a
+                href="https://twitter.com/"
+                class="twitter"
+                target="_blank"
+              ></a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/?hl=en"
+                class="instagram"
+                target="_blank"
+              ></a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/"
+                class="linkedin"
+                target="_blank"
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
 
     <script>
       const menuToggle = document.querySelector(".menu-bars");

@@ -22,7 +22,7 @@
 	<style>
 		body {
 			background-color: #f2f2f2;
-			font-family: Arial, sans-serif;
+			font-family: 'Rubik', sans-serif;
 			margin: 0;
 			padding: 0;
 		}
@@ -192,7 +192,7 @@
 <body>
 	<nav>
 		<div class="logo">
-		<h2><a href="index.html" style = "text-decoration:none; 
+		<h2><a href="index.php" style = "text-decoration:none; 
 		color:rgb(255, 254, 254); font-size:35px;">
 		GymPal</a></h2>
 		</div>
@@ -200,8 +200,8 @@
 	<ul>
 	<li><a href="index.php">Home</a></li>
 	<li><a href="about_us.php">About</a></li>
-	<li><a href="profile_page.php">About</a></li>
-	<li><a href="exercises.php">Workouts </a></li>
+	<li><a href="exercises.php">Workouts</a></li>
+	<li><a href="workout.php">Create</a></li>
 	<li><a href="contact.php">Contact</a></li>
 
 	<!-- Change the nav bar depending on whether the user is signed in or not -->
@@ -294,7 +294,6 @@
 			echo '<div class="workout-dropdown-content">';
 
 			while ($innerRow = $res2->fetch_assoc()) {
-				echo '<script> console.log("lolol") </script>';
 				$sets = $innerRow["sets"];
 				$reps = $innerRow["reps"];
 				$weight = $innerRow["weight"];

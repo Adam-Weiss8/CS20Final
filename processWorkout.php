@@ -1,4 +1,5 @@
 <?php
+session_start();
 //make database connection
 $host = "localhost";
 $dbname = "dbc82q21fitl3f";
@@ -34,15 +35,13 @@ for ($i = 0; $i < $numExercises; $i++) {
         $reps = intval($_POST["reps" . $i]);
         $weight = strval($_POST["weight" . $i]);
 
-         echo "<script>console.log('$exerciseNum');</script>";
-
-        //echo "<script>console.log(". $exerciseNum .  $sets . $reps . $weight . ") </script>"
-
-
         //add data to the database
         $sql = "INSERT INTO exercises (exerciseName, workoutID, reps, sets, weight) VALUES ('$exerciseNum', '$WorkoutID', '$sets', '$reps', '$weight')";
         mysqli_query($mysqli, $sql);
 }
+
+$sql = "UPDATE users SET workoutsCompleted = workoutsCompleted + 1 WHERE userID = '$userID'";
+mysqli_query($mysqli, $sql);
 
 
 

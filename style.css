@@ -1,83 +1,83 @@
 * {
     margin: 0;
     padding: 0;
-  }
-  body {
+}
+body {
     font-family: 'Rubik', sans-serif;
     overflow-x: hidden;
-  }
-  
-  
-  nav {
-  display:flex;
-  background-color: rgb(27, 104, 135);
-  justify-content: space-around;
-  padding:20px 0;
-  color:rgb(255, 254, 254);
-  
-  align-items: center;
-  }
-  
-  nav.logo{
-  letter-spacing: 3px;
-  }
-  
-  nav ul{
-  display:flex;
-  list-style: none;
-  width:40%;
-  
-  justify-content: space-between;
-  }
-  nav ul li a {
+}
+
+
+nav {
+display:flex;
+background-color: rgb(27, 104, 135);
+justify-content: space-around;
+padding:20px 0;
+color:rgb(255, 254, 254);
+
+align-items: center;
+}
+
+nav.logo{
+letter-spacing: 3px;
+}
+
+nav ul{
+display:flex;
+list-style: none;
+width:40%;
+
+justify-content: space-between;
+}
+nav ul li a {
     color:rgb(255, 254, 254);
     text-decoration: none;
     font-size: 20px;
     margin: 0 10px 0;
-  }
-  
-  nav ul li a:hover {
+}
+
+nav ul li a:hover {
     color: rgba(189, 181, 181, 0.505)
-  }
-  
-  .btn{
-  border-radius: 40px;
-  }
-  /*Hamburger */
-  .menu-bars{
-  display:none;
-  flex-direction: column;
-  height:20px;
-  justify-content: space-between;
-  position:relative;
-  }
-  .menu-bars input{
-  position: absolute;
-  width:40px;
-  height:28px;
-  left:-5px;
-  top:-3px;
-  opacity: 0;
-  cursor:pointer;
-  z-index: 1;
-  }
-  
-  .menu-bars span{
-  display:block;
-  width:28px;
-  height:3px;
-  background-color:rgb(255, 254, 254);
-  border-radius: 3px;
-  }
-  
-  @media only screen and (max-width: 768px){
-  nav ul{
-  width:50%;
-  }
-  
-  }
-  
-  @media only screen and (max-width: 576px){
+}
+
+.btn{
+border-radius: 40px;
+}
+/*Hamburger */
+.menu-bars{
+display:none;
+flex-direction: column;
+height:20px;
+justify-content: space-between;
+position:relative;
+}
+.menu-bars input{
+position: absolute;
+width:40px;
+height:28px;
+left:-5px;
+top:-3px;
+opacity: 0;
+cursor:pointer;
+z-index: 1;
+}
+
+.menu-bars span{
+display:block;
+width:28px;
+height:3px;
+background-color:rgb(255, 254, 254);
+border-radius: 3px;
+}
+
+@media only screen and (max-width: 768px){
+nav ul{
+width:50%;
+}
+
+}
+
+@media only screen and (max-width: 576px){
     .menu-bars{
     display:flex;
     }
@@ -97,7 +97,7 @@
     }
     }
     nav ul.slide{
-      transform: translate(0, 0);
+    transform: translate(0, 0);
     }
 
 footer {

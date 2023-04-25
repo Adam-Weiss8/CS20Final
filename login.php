@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($user) {
         session_start();
         session_regenerate_id();
-        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["user_id"] = $user["userID"];
         header("Location: profile_page.php");
         exit;
     } else {

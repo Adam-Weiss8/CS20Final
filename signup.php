@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,14 +65,21 @@
 <body>
   <nav>
     <div class="logo">
-      <h2><a href="index.html" style="text-decoration:none; color:rgb(255, 254, 254); font-size:35px;">GymPal</a></h2>
+      <h2><a href="index.php" style="text-decoration:none; color:rgb(255, 254, 254); font-size:35px;">GymPal</a></h2>
     </div>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about_us.html">About</a></li>
-      <li><a href="exercises.hyml">Workouts </a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.php">Login</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="about_us.php">About</a></li>
+      <li><a href="exercises.php">Workouts </a></li>
+      <li><a href="workout.php">Create</a></li>
+      <li><a href="contact.php">Contact</a></li>
+      <?php
+        if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+            echo '<li><a href="profile_page.php">Profile</a></li>';
+        } else {
+            echo '<li><a href="login.php">Login</a></li>';
+        }
+      ?>
     </ul>
     <div class="menu-bars">
       <input type="checkbox">

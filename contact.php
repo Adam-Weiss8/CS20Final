@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +77,6 @@
       <li><a href="workout.php">Create</a></li>
       <li><a href="contact.php">Contact</a></li>
       <?php
-        session_start();
         if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
             echo '<li><a href="profile_page.php">Profile</a></li>';
         } else {
