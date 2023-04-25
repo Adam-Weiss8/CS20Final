@@ -12,7 +12,7 @@ $checkUsernameStmt->close();
 
 if ($count > 0) {
     echo "<script>alert('Account with this username already exists');</script>";
-    echo "<script>window.location.href = 'signup.php';</script>"; // Redirect back to signup.html
+    echo "<script>window.location.href = 'signup.php';</script>"; // Redirect back to signup.php
     exit; // Exit to prevent further execution of the script
 } else {
     $sql = "INSERT INTO users (username, password, joinDate, workoutsCompleted, height, weight, age)
