@@ -29,7 +29,7 @@
 
 	<!-- Change the nav bar depending on whether the user is signed in or not -->
     <?php
-      if ($_SESSION['user_id']) {
+      if (isset($_SESSION['user_id'])) {
         echo '<li><a href="profile_page.php">Profile Page</a></li>';
       } else {
         echo '<li><a href="signup.html">Sign up/Login</a></li>';
