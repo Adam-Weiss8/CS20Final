@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         session_start();
         session_regenerate_id();
         $_SESSION["user_id"] = $user["id"];
-        header("Location: profile.html");
+        header("Location: profile_page.php");
         exit;
     } else {
         $invalid_login = true;
@@ -100,18 +100,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
   <nav>
     <div class="logo">
-      <h2><a href="index.html" style="text-decoration:none; 
+      <h2><a href="index.php" style="text-decoration:none; 
         color:rgb(255, 254, 254); font-size:35px;">
           GymPal</a></h2>
     </div>
   
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about_us.html">About</a></li>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="about_us.php">About</a></li>
       <!-- <li><a href="prrofile_page.php">About</a></li> -->
-      <li><a href="exercises.html">Workouts </a></li>
-      <li><a href="workout.html">Create</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="exercises.php">Workouts </a></li>
+      <li><a href="workout.php">Create</a></li>
+      <li><a href="contact.php">Contact</a></li>
       <li><a href="login.php">Login</a></li>
     </ul>
     <div class="menu-bars">
@@ -149,9 +149,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <div class="footer-col">
             <h3>GymPal</h3>
             <ul>
-              <li><a href="about_us.html">About</a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="exercises.html">Workouts</a></li>
+              <li><a href="about_us.php">About</a></li>
+              <li><a href="contact.php">Contact</a></li>
+              <li><a href="exercises.php">Workouts</a></li>
               <li><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Blog</a></li>
             </ul>
           </div>
