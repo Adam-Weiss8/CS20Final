@@ -62,7 +62,7 @@ if ($count > 0) {
     );
 
     if ($stmt->execute()) {
-        header("Location: login.php");
+        header("Location: edit_profile.php");
         exit;
     } else {
         die($stmt->error . " " . $stmt->errno);

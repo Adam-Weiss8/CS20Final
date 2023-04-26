@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,6 +84,14 @@
   
   <div class="signup-form">
     <form id="signupForm" action="signupForm.php" method="post" id="signup">
+        <div>
+            <label for="firstName">First Name:</label>
+            <input type="firstName" id="firtName" name="firstName">
+        </div>
+        <div>
+            <label for="lastName">Last Name:</label>
+            <input type="lastName" id="lastName" name="lastName">
+        </div>
         <div>
             <label for="height">Height:</label>
             <input type="height" id="height" name="height">
